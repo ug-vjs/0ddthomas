@@ -18,6 +18,7 @@
   gtag('config', 'G-75PJH60JGV');
 </script>
 
+
 <meta name="google-site-verification" content="QvAS2CuQyucmtQu49416Ed7EIS-lqCYn_4iI55QNjwo" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -481,6 +482,190 @@ videoPlayer.addEventListener('fullscreenchange', function() {
 
 </script>
 
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #000;
+  text-align: center;
+}
+
+.video-container {
+  width: 100%;
+  max-width: 1120px;
+  height: 2000px;
+  margin: 50px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+}
+
+.loading-box {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.loading-text {
+  color: red;
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.spinner {
+  width: 70px;
+  height: 70px;
+  border: 6px solid rgba(255,0,0,0.3);
+  border-top: 6px solid red;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+iframe {
+  width: 100%;
+  height: 2000px;
+  border: none;
+  display: none;
+  background: #000;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="video-container">
+
+  <div class="loading-box" id="loadingBox">
+    <div class="spinner" id="spinner"></div>
+    <div class="loading-text" id="statusText">Loading 8</div>
+  </div>
+
+  <iframe id="videoFrame" scrolling="no"></iframe>
+
+</div>
+
+<script>
+/* ===== CONFIG ===== */
+const sites = [
+  "https://www.marketing2advertising.com/p/get-paid-by-completing-microtasks.html",
+  "https://www.marketing2advertising.com/p/job-matching-across-ireland-singapore_2.html",
+  "https://www.marketing2advertising.com/2026/02/vj-junior-greenland-2-migration.html",
+  "https://www.marketing2advertising.com/2026/02/vj-junior-anaconda.html",
+  "https://www.marketing2advertising.com/2026/01/vj-junior-mad-max-fury-road.html",
+  "https://www.marketing2advertising.com/2026/01/vj-junior-django-unchained.html",
+  "https://www.marketing2advertising.com/2025/12/vj-junior-keeper.html",
+  "https://www.marketing2advertising.com/2025/12/vj-junior-keeper.html",
+  "https://www.marketing2advertising.com/2025/12/vj-emmy-girl-in-attic.html",
+
+  "https://www.marketing2advertising.com/2025/12/vj-emmy-muzzle-city-of-wolves.html",
+  "https://www.marketing2advertising.com/2025/12/vj-junior-wildcat.html",
+  "https://www.marketing2advertising.com/2025/12/vj-junior-running-man.html",
+  "https://www.marketing2advertising.com/2025/12/vj-junior-sarahs-oil.html",
+  "https://www.marketing2advertising.com/2025/12/vj-junior-hard-rain.html",
+
+  "https://www.marketing2advertising.com/2025/12/vj-junior-bad-genius.html",
+  "https://www.marketing2advertising.com/2025/12/vj-junior-special-forces-vs-ruthless.html",
+  "https://www.marketing2advertising.com/2025/11/vj-junior-man-on-fire.html",
+  "https://www.funda.nl",
+
+  "https://www.marketing2advertising.com/2025/11/vj-junior-american-virgin.html",
+  "https://www.marketing2advertising.com/2025/11/vj-junior-safe-house_12.html",
+  "https://www.marketing2advertising.com/2025/10/vj-junior-marvels.html",
+
+  "https://www.marketing2advertising.com/p/vj-junior-anaconda.html",
+  "https://www.marketing2advertising.com/p/mad-max-fury-road-vj-junior.html",
+
+  "https://www.marketing2advertising.com/p/django-unchained-vj-junior.html",
+  "https://www.marketing2advertising.com/p/the-internship-vj-junior.html",
+  "https://www.marketing2advertising.com/p/escobank-vj-junior.html",
+  "https://www.marketing2advertising.com/p/hunting-season-vj-junior.html",
+
+  "https://www.marketing2advertising.com/p/caregiver-nursing-jobs.html",
+  "https://www.marketing2advertising.com/p/best-business-web-hosting-and-ai_2.html",
+  "https://www.marketing2advertising.com/p/job-visa-sponsorship-and-accommodation_2.html",
+  "https://www.marketing2advertising.com/p/cv-builder_2.html",
+
+  "https://g4rnld.marketing2advertising.com",
+  "https://allvjs2026.marketing2advertising.com/TheInternship/VJ-%3EJunior.html",
+  "https://allvjs2026.marketing2advertising.com/MadMaxFuryRoad/Vj-Junior.html"
+];
+
+const ROTATE_DELAY = 60000;     // 1 minute per site
+const SKIP_TIMEOUT = 8000;     // auto-skip after 8 seconds
+let LOAD_TIME = 8;
+/* ==================== */
+
+let index = 0;
+let rotateTimer;
+let skipTimer;
+let loaded = false;
+
+const statusText = document.getElementById("statusText");
+const loadingBox = document.getElementById("loadingBox");
+const spinner = document.getElementById("spinner");
+const iframe = document.getElementById("videoFrame");
+
+/* Countdown */
+const countdown = setInterval(() => {
+  LOAD_TIME--;
+  statusText.textContent = "Loading " + LOAD_TIME;
+
+  if (LOAD_TIME <= 0) {
+    clearInterval(countdown);
+    startAuto();
+  }
+}, 1000);
+
+function startAuto() {
+  spinner.style.display = "none";
+  statusText.textContent = "READY";
+
+  setTimeout(() => {
+    loadingBox.style.display = "none";
+    iframe.style.display = "block";
+    loadSite();
+    rotateTimer = setInterval(loadSite, ROTATE_DELAY);
+  }, 1000);
+}
+
+function loadSite() {
+  if (index >= sites.length) {
+    clearInterval(rotateTimer);
+    return;
+  }
+
+  loaded = false;
+  iframe.src = sites[index];
+
+  // Auto-skip if blocked
+  clearTimeout(skipTimer);
+  skipTimer = setTimeout(() => {
+    if (!loaded) {
+      index++;
+      loadSite();
+    }
+  }, SKIP_TIMEOUT);
+
+  index++;
+}
+
+// Detect successful load
+iframe.onload = () => {
+  loaded = true;
+  clearTimeout(skipTimer);
+};
+</script>
     </div>
 
 <!-- ===================== CONTENT ===================== -->
